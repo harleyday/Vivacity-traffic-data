@@ -11,4 +11,6 @@ traffic <-
   rename_with(toupper) %>% # Modify all names to uppercase
   rename(DATE = UTC.TIME) %>% # rename the clunky date column to "DATE" for simplicity
   mutate(DAY = wday(DATE, label = TRUE)) %>% # add a "day of the week" column
-  write_csv("traffic_data.csv")
+  write_csv(here("data", "processed_data", "traffic_data.csv"))
+
+            
