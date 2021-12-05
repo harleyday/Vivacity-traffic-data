@@ -12,7 +12,7 @@ transport_modes <-
 ## calculates the average number of each model at each location and direction over the entire duration
 average <- traffic %>%
   group_by(COUNTLINENAME, DIRECTION) %>%
-  summarise_at(transport_modes, list(mean = mean, sd = sd))
+  summarise_at(all_of(transport_modes), list(mean = mean, sd = sd))
 
 ## compare average numbers for each mode in each direction on weekdays and weekends
 wkday_numbers <- traffic %>%
@@ -28,4 +28,4 @@ wkend_numbers <- traffic %>%
 ## totals for each mode on each day
 total_counts <- traffic %>%
   group_by(DATE) %>%
-  summarise_at(transport_modes, sum)
+  summarise(across(transport_modes, sum))
