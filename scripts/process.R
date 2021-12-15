@@ -31,6 +31,6 @@ total_counts <- traffic %>%
   summarise(across(all_of(transport_modes), sum))
 
 ## totals for each mode over 22nd Oct 2021 for Appledorn
-total_counts_22Oct2021_Appledorn <- appledorn_15_minute_24Oct2021_traffic %>%
+total_counts_22Oct2021_Appledorn <- appledorn_15_minute_22Oct2021_traffic %>%
   group_by(LOCAL.TIME..SENSOR.) %>%
   summarise(across(all_of(transport_modes), sum))
