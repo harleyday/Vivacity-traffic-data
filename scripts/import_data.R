@@ -35,7 +35,7 @@ appledorn_15_minute_22Oct2021_traffic <-
     here(
       "data",
       "raw_data",
-      "Apeldoorn Drive far end traffic sensor data 24 October 2021.csv"
+      "Apeldoorn Drive far end traffic sensor data 22 October 2021.csv"
     ),
     name_repair = "universal"
   ) %>%
