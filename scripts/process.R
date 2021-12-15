@@ -18,19 +18,19 @@ average <- traffic %>%
 wkday_numbers <- traffic %>%
   filter(!DAY %in% c("Sat", "Sun")) %>% # filter for just working week
   group_by(DIRECTION) %>%
-  summarise(across(transport_modes, mean))
+  summarise(across(all_of(transport_modes), mean))
 
 wkend_numbers <- traffic %>%
   filter(DAY %in% c("Sat", "Sun")) %>% # filter for just weekends
   group_by(DIRECTION) %>%
-  summarise(across(transport_modes, mean))
+  summarise(across(all_of(transport_modes), mean))
 
 ## totals for each mode on each day
 total_counts <- traffic %>%
   group_by(DATE) %>%
-  summarise(across(transport_modes, sum))
+  summarise(across(all_of(transport_modes), sum))
 
 ## totals for each mode over 22nd Oct 2021 for Appledorn
 total_counts_22Oct2021_Appledorn <- appledorn_15_minute_24Oct2021_traffic %>%
   group_by(LOCAL.TIME..SENSOR.) %>%
-  summarise(across(transport_modes, sum))
+  summarise(across(all_of(transport_modes), sum))
