@@ -41,3 +41,21 @@ wkday_numbers %>%
   geom_bar(aes(weight = COUNT, fill = DIRECTION)) + 
   ggtitle('Average mode counts on weekdays')
 ggsave(here('img','weekdays.png'))
+
+## Appledorn data
+
+# TODO: clear up the x-axis labelling
+library(scales)
+
+total_counts_22Oct2021_Appledorn %>%
+  pivot_longer(transport_modes, names_to = "MODE", values_to = "COUNT") %>%
+  ggplot(aes(
+    x = LOCAL.TIME..SENSOR.,
+    y = COUNT,
+    group = MODE,
+    colour = MODE
+  )) + geom_line() +
+  #scale_x_datetime(breaks = breaks_pretty(24))
+  geom_ma(ma_fun = SMA, n = 7) + 
+  ggtitle('Timecourse for each mode')
+ggsave(here('img','timecourse.png'))
