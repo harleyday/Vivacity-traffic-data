@@ -48,7 +48,7 @@ ggsave(here('img','weekdays.png'))
 library(scales)
 
 total_counts_22Oct2021_Appledorn %>%
-  pivot_longer(transport_modes, names_to = "MODE", values_to = "COUNT") %>%
+  pivot_longer(all_of(transport_modes), names_to = "MODE", values_to = "COUNT") %>%
   ggplot(aes(
     x = LOCAL.TIME..SENSOR.,
     y = COUNT,
@@ -59,3 +59,15 @@ total_counts_22Oct2021_Appledorn %>%
   geom_ma(ma_fun = SMA, n = 7) + 
   ggtitle('Timecourse for each mode')
 ggsave(here('img','timecourse.png'))
+
+##### Sutton-wide Vivacity data
+sum_nonzero_either_direction_each_day %>%
+  filter(COUNTLINENAME=="L12_LindberghRd_road_and_LHS_path_s140") %>%
+  pivot_longer(all_of(transport_modes), names_to = "MODE", values_to = "COUNT") %>%
+  ggplot(aes(
+    x = DATE,
+    y = COUNT,
+    group = MODE,
+    colour = MODE
+  )) + geom_line() +
+  labs(title = "L12_LindberghRd_road_and_LHS_path_s140")
