@@ -42,3 +42,33 @@ appledorn_15_minute_22Oct2021_traffic <-
   rename_with(toupper) %>% # Modify all names to uppercase
   rename(DATE = UTC.TIME) %>% # rename the clunky date column to "DATE" for simplicity
   mutate(DAY = wday(DATE, label = TRUE))
+
+Sutton_wide_traffic_data <-
+  read_excel(
+    here("data", "raw_data", "Vivacity data.xlsx"),
+    sheet = "all LBS 26 July to 19 Dec",
+    col_types = c(
+      "date",
+      "date",
+      "text",
+      "text",
+      "numeric",
+      "numeric",
+      "numeric",
+      "numeric",
+      "numeric",
+      "numeric",
+      "numeric",
+      "numeric",
+      "skip",
+      "skip",
+      "skip",
+      "skip",
+      "skip"
+    ),
+    .name_repair = "universal"
+  ) %>%
+  rename_with(toupper) %>% # Modify all names to uppercase
+  rename(DATE = UTC.TIME) %>% # rename the clunky date column to "DATE" for simplicity
+  mutate(DAY = wday(DATE, label = TRUE)) %>% # add a "day of the week" column
+  write_csv(here("data", "processed_data", "sutton_wide_traffic_data.csv"))
